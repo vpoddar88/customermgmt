@@ -11,6 +11,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
@@ -21,23 +24,53 @@ public class ClientControllerTest {
 
     @InjectMocks private ClientController clientController;
 
-    private Client expectedClient;
+    private Client expectedIndividualClient;
+    private Client expectedBusinessClient;
+    private List<Client> expectedIndividualClients;
+    private List<Client> expectedBusinessClients;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        expectedClient = new Client("name", ClientType.BUSINESS, "Plano");
+        expectedIndividualClient = new Client("name", ClientType.INDIVIDUAL, "Plano");
+        expectedBusinessClient = new Client("name", ClientType.BUSINESS, "Plano");
 
-        when(mockClientService.getClientById(eq(1L))).thenReturn(expectedClient);
+        expectedIndividualClients = new ArrayList<>();
+        expectedIndividualClients.add(expectedIndividualClient);
+
+        expectedBusinessClients = new ArrayList<>();
+        expectedBusinessClients.add(expectedBusinessClient);
     }
 
     @Test
     public void testGetClient() throws Exception {
+        when(mockClientService.getClientById(eq(1L))).thenReturn(expectedBusinessClient);
+
         Client actualClient = clientController.getClient("1");
 
         verify(mockClientService).getClientById(1L);
-        assertEquals(expectedClient.toString(), actualClient.toString());
+        assertEquals(expectedBusinessClient.toString(), actualClient.toString());
+    }
+
+    @Test
+    public void testGetListOfIndividualClients() throws Exception {
+        when(mockClientService.getAllClientsByType(eq(ClientType.INDIVIDUAL))).thenReturn(expectedIndividualClients);
+
+        List<Client> actualClients = clientController.getClients(ClientType.INDIVIDUAL);
+
+        verify(mockClientService).getAllClientsByType(ClientType.INDIVIDUAL);
+        assertEquals(expectedIndividualClients.toString(), actualClients.toString());
+    }
+
+    @Test
+    public void testGetListOfBusinessClients() throws Exception {
+        when(mockClientService.getAllClientsByType(eq(ClientType.BUSINESS))).thenReturn(expectedBusinessClients);
+
+        List<Client> actualClients = clientController.getClients(ClientType.BUSINESS);
+
+        verify(mockClientService).getAllClientsByType(ClientType.BUSINESS);
+        assertEquals(expectedBusinessClients.toString(), actualClients.toString());
     }
 
 }

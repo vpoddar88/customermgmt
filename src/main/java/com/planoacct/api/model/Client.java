@@ -12,14 +12,14 @@ public class Client {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
     private String name;
-    private ClientType type;
+    private ClientType clientType;
     private String city;
 
     protected Client(){}
 
-    public Client(String name, ClientType type, String city) {
+    public Client(String name, ClientType clientType, String city) {
         this.name = name;
-        this.type = type;
+        this.clientType = clientType;
         this.city = city;
     }
 
@@ -35,12 +35,12 @@ public class Client {
         this.name = name;
     }
 
-    public ClientType getType() {
-        return type;
+    public ClientType getClientType() {
+        return clientType;
     }
 
-    public void setType(ClientType type) {
-        this.type = type;
+    public void setClientType(ClientType clientType) {
+        this.clientType = clientType;
     }
 
     public String getCity() {
@@ -56,7 +56,7 @@ public class Client {
         return "Client{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", type=" + type +
+                ", clientType=" + clientType +
                 ", city='" + city + '\'' +
                 '}';
     }

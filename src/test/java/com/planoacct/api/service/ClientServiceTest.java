@@ -3,7 +3,6 @@ package com.planoacct.api.service;
 import com.planoacct.api.data.ClientRepository;
 import com.planoacct.api.model.Client;
 import com.planoacct.api.model.ClientType;
-import com.planoacct.api.rest.ClientController;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,6 +11,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.*;
@@ -26,12 +27,16 @@ public class ClientServiceTest {
     @InjectMocks private ClientService clientService;
 
     private Client expectedClient;
+    private List<Client> expectedBusinessClients;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
         expectedClient = new Client("name", ClientType.BUSINESS, "Plano");
+
+        expectedBusinessClients = new ArrayList<>();
+        expectedBusinessClients.add(expectedClient);
     }
 
     @Test
@@ -54,6 +59,17 @@ public class ClientServiceTest {
 
         verify(mockClientRepository).findById(1L);
         assertNull(actualClient);
+    }
+
+    @Test
+    public void testGetClientsByType() throws Exception {
+        Optional<Client> optional = Optional.of(expectedClient);
+        when(mockClientRepository.findAllByClientType(eq(ClientType.INDIVIDUAL))).thenReturn(expectedBusinessClients);
+
+        List<Client> actualClients = clientService.getAllClientsByType(ClientType.INDIVIDUAL);
+
+        verify(mockClientRepository).findAllByClientType(ClientType.INDIVIDUAL);
+        assertEquals(expectedBusinessClients.toString(), actualClients.toString());
     }
 
 }
