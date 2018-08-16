@@ -57,7 +57,7 @@ public class ClientControllerTest {
     public void testGetListOfIndividualClients() throws Exception {
         when(mockClientService.getAllClientsByType(eq(ClientType.INDIVIDUAL))).thenReturn(expectedIndividualClients);
 
-        List<Client> actualClients = clientController.getClients(ClientType.INDIVIDUAL);
+        List<Client> actualClients = clientController.addClient(ClientType.INDIVIDUAL);
 
         verify(mockClientService).getAllClientsByType(ClientType.INDIVIDUAL);
         assertEquals(expectedIndividualClients.toString(), actualClients.toString());
@@ -67,10 +67,20 @@ public class ClientControllerTest {
     public void testGetListOfBusinessClients() throws Exception {
         when(mockClientService.getAllClientsByType(eq(ClientType.BUSINESS))).thenReturn(expectedBusinessClients);
 
-        List<Client> actualClients = clientController.getClients(ClientType.BUSINESS);
+        List<Client> actualClients = clientController.addClient(ClientType.BUSINESS);
 
         verify(mockClientService).getAllClientsByType(ClientType.BUSINESS);
         assertEquals(expectedBusinessClients.toString(), actualClients.toString());
+    }
+
+    @Test
+    public void testAddNewClient() throws Exception {
+        when(mockClientService.addNewClient(any())).thenReturn(expectedBusinessClient);
+
+        Client createdClient = clientController.addClient(expectedBusinessClient);
+
+        verify(mockClientService).addNewClient(eq(expectedBusinessClient));
+        assertEquals(expectedBusinessClient.toString(), createdClient.toString());
     }
 
 }

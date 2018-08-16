@@ -17,6 +17,7 @@ import java.util.Optional;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -70,6 +71,16 @@ public class ClientServiceTest {
 
         verify(mockClientRepository).findAllByClientType(ClientType.INDIVIDUAL);
         assertEquals(expectedBusinessClients.toString(), actualClients.toString());
+    }
+
+    @Test
+    public void testAddClient() throws Exception {
+        when(mockClientRepository.save(any())).thenReturn(expectedClient);
+
+        Client createdClient = clientService.addNewClient(expectedClient);
+
+        verify(mockClientRepository).save(eq(expectedClient));
+        assertEquals(expectedClient.toString(), createdClient.toString());
     }
 
 }

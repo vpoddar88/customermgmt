@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("client")
+@RequestMapping("clients")
 public class ClientController {
 
     @Autowired
@@ -21,8 +21,12 @@ public class ClientController {
     }
 
     @RequestMapping(value="", method=RequestMethod.GET, produces="application/json")
-    public @ResponseBody
-    List<Client> getClients(@RequestParam(value = "type") ClientType type) {
+    public @ResponseBody List<Client> addClient(@RequestParam(value = "type") ClientType type) {
         return clientService.getAllClientsByType(type);
+    }
+
+    @RequestMapping(value="", method=RequestMethod.POST, produces="application/json")
+    public @ResponseBody Client addClient(@RequestBody Client newClient) {
+        return clientService.addNewClient(newClient);
     }
 }
