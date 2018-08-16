@@ -16,3 +16,6 @@ Use the following command to run the docker image locally
 
 ```docker run -e "SPRING_PROFILES_ACTIVE=local" -p 8080:8080 <image id>```
 
+## POSTMan
+
+Import the "Customer Management.postman_collection.json" to your POSTMan
