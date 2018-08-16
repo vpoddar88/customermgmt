@@ -21,7 +21,7 @@ public class ClientController {
     }
 
     @RequestMapping(value="", method=RequestMethod.GET, produces="application/json")
-    public @ResponseBody List<Client> addClient(@RequestParam(value = "type") ClientType type) {
+    public @ResponseBody List<Client> getAllClientsByType(@RequestParam(value = "type") ClientType type) {
         return clientService.getAllClientsByType(type);
     }
 
