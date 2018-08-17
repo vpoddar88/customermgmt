@@ -2,7 +2,7 @@
 	"variables": [],
 	"info": {
 		"name": "Customer Management",
-		"_postman_id": "1e43701f-60ca-3173-b0d5-7591de24ad72",
+		"_postman_id": "1a3dba7d-8fa3-c500-551b-48e282ea30b2",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -21,6 +21,48 @@
 					{
 						"key": "Authorization",
 						"value": "Basic am9obmRvZTpwbGFub2FjY3Q=",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Error: Bad Credentials",
+			"request": {
+				"url": "http://localhost:8080/api/clients/1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Authorization",
+						"value": "Basic am9objppbnZhbGlk",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Error: No Credentials",
+			"request": {
+				"url": "http://localhost:8080/api/clients/1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
 						"description": ""
 					}
 				],
@@ -46,7 +88,10 @@
 						"description": ""
 					}
 				],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"description": ""
 			},
 			"response": []
@@ -54,27 +99,7 @@
 		{
 			"name": "Get Individual Clients",
 			"request": {
-				"url": {
-					"raw": "http://localhost:8080/api/clients?type=INDIVIDUAL",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"clients"
-					],
-					"query": [
-						{
-							"key": "type",
-							"value": "INDIVIDUAL",
-							"equals": true,
-							"description": ""
-						}
-					],
-					"variable": []
-				},
+				"url": "http://localhost:8080/api/clients?type=INDIVIDUAL",
 				"method": "GET",
 				"header": [
 					{
@@ -88,7 +113,10 @@
 						"description": ""
 					}
 				],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"description": ""
 			},
 			"response": []
@@ -96,27 +124,7 @@
 		{
 			"name": "Get Business Clients",
 			"request": {
-				"url": {
-					"raw": "http://localhost:8080/api/clients?type=BUSINESS",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"clients"
-					],
-					"query": [
-						{
-							"key": "type",
-							"value": "BUSINESS",
-							"equals": true,
-							"description": ""
-						}
-					],
-					"variable": []
-				},
+				"url": "http://localhost:8080/api/clients?type=BUSINESS",
 				"method": "GET",
 				"header": [
 					{
@@ -130,7 +138,10 @@
 						"description": ""
 					}
 				],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"description": ""
 			},
 			"response": []
@@ -138,27 +149,7 @@
 		{
 			"name": "Error: Client type not supported",
 			"request": {
-				"url": {
-					"raw": "http://localhost:8080/api/clients?type=INVALID",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"api",
-						"clients"
-					],
-					"query": [
-						{
-							"key": "type",
-							"value": "INVALID",
-							"equals": true,
-							"description": ""
-						}
-					],
-					"variable": []
-				},
+				"url": "http://localhost:8080/api/clients?type=INVALID",
 				"method": "GET",
 				"header": [
 					{
@@ -172,7 +163,10 @@
 						"description": ""
 					}
 				],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"description": ""
 			},
 			"response": []
